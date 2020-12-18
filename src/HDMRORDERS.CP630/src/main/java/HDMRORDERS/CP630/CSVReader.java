@@ -9,15 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import HDMRORDERS.CP630.RESOURCE.*;
-
 public class CSVReader {
 
 	public CSVReader() {
 	}
 
 	public int ImportCSVsToDB(int option) {
-		int result = GLOBAL.NOT_WORK;
+		int result = 0;
 
 		String jdbcURL = "jdbc:mysql://localhost:3306/db_orders";
 		String username = "root";
@@ -33,7 +31,6 @@ public class CSVReader {
 
 		int batchSize = 20;
 		Connection connection = null;
-		Util util = new Util();
 
 		String order_num = "";
 		/* Init variables */
@@ -111,7 +108,7 @@ public class CSVReader {
 					Timestamp sqlTimestamp = null;
 
 					try {
-						sqlTimestamp = Timestamp.valueOf(util.convertStringToTS(transaction_date));
+						sqlTimestamp = Timestamp.valueOf(Util.convertStringToTS(transaction_date));
 					} catch (Exception e) {
 					}
 					statement.setTimestamp(10, sqlTimestamp);
