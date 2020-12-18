@@ -1,4 +1,4 @@
-package HDMRORDERS.HDMRORDERS.CP630.DAO;
+package HDMRORDERS.CP630.DAO;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

@@ -1,10 +1,10 @@
-package HDMRORDERS.HDMRORDERS.CP630.DAO;
+package HDMRORDERS.CP630.DAO;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import HDMRORDERS.HDMRORDERS.CP630.Util;
+import HDMRORDERS.CP630.Util;
 
 public class OrderDao implements IOrderDao {
 

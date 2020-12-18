@@ -1,4 +1,4 @@
-package HDMRORDERS.HDMRORDERS.CP630;
+package HDMRORDERS.CP630;
 
 /**
  * Hello world!
