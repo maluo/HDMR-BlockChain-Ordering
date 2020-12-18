@@ -25,7 +25,7 @@ The interesting point here is the Map-Reduce algorithms.
 
 ## Do data computing to generate models, representing models in portable format and stored in file or database. More credit is given if distributed approach is used data mining of big dataset
 
-Write a short description (including the new features).
+Write a short description (including the new features). working on it.
 
 Balancing:
 
@@ -39,25 +39,39 @@ Need to start on it first before the complex algorithms.
 
 ### Task breakdown:
 
-#### 1.Maven client based back-end with hibernate h2b - covert sql table to model entity
-#### 2.
-#### 3.
+#### 1.Maven client based back-end with hibernate h2b - covert sql table to model entity - Done.
+
+#### 2.CRUD Portal with JPA and Srping Data Framework.
+
+#### 3.Start Hadoop on client side.
 
 ## Deploy service components onto enterprise application servers.
 
 Write a short description (including the new features).
 
+### Task breakdown:
+
+#### 1.Inject the Hadoop client code into EJB.
+
+#### 2.Deploy EJB component and test out with local client.
+
 ## Create web services (SOAP, RESTful) to use the data service components.
+
+### Task breakdown:
+
+#### 1.Develop rest service with EJB.
+
+#### 2.Direct the dashboard service back to the main Spring MVC Web Portal.
 
 Write a short description (including the new features).
 
 ## Create web user interface/mobile applications to use the application/web services.
 
-Write a short description (including the new features).
+Done with the previous tasks.
 
 ## Test your services, log your services, and document your term project.
 
-Write a short description (including the new features).
+Testing and logging would be saved for future development
 
 ## Demonstrate your term project in final project presentation, slides, or short video.
 
