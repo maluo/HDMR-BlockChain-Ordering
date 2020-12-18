@@ -39,7 +39,7 @@ Need to start on it first before the complex algorithms.
 
 ### Task breakdown:
 
-#### 1.
+#### 1.Maven client based back-end with hibernate h2b - covert sql table to model entity
 #### 2.
 #### 3.
 
