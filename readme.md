@@ -6,6 +6,7 @@
 ## Write a project proposal (2-3 pages) - Done. [30/30/*]
 
 ## Design data format, collect data, create dataset for the application - Done. [30/30/*]
+
 Data is from a real world example on facebook market store.  The importing and sales orders are sitting on the same dashboard which is a perfect example of semi-structured data.  We have them exported from google sheet and would like to perform analysis on the dashboard.  The service calculation would be totally rely on Map-Reduce algorithms.
 
 ### HDSF Map-Reduce Service points:
