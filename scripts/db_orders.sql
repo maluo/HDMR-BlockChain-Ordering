@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2020-12-18 04:39:07
+-- 生成日期： 2020-12-18 17:04:36
 -- 服务器版本： 10.4.6-MariaDB
 -- PHP 版本： 7.3.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 数据库： `test`
+-- 数据库： `db_orders`
 --
 
 -- --------------------------------------------------------
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `product_name` varchar(255) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
@@ -53,7 +54,7 @@ CREATE TABLE `orders` (
   `sales_price` float DEFAULT NULL,
   `subtotal` float DEFAULT NULL,
   `gross_income` float DEFAULT NULL,
-  `transaction_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `transaction_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `sys_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -65,7 +66,8 @@ CREATE TABLE `orders` (
 -- 表的索引 `items`
 --
 ALTER TABLE `items`
-  ADD PRIMARY KEY (`product_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_id` (`product_id`);
 
 --
 -- 表的索引 `orders`
@@ -82,7 +84,7 @@ ALTER TABLE `orders`
 -- 使用表AUTO_INCREMENT `items`
 --
 ALTER TABLE `items`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用表AUTO_INCREMENT `orders`
@@ -98,7 +100,7 @@ ALTER TABLE `orders`
 -- 限制表 `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `FK_Order_Item` FOREIGN KEY (`item_num`) REFERENCES `items` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `FK_Order_Item` FOREIGN KEY (`item_num`) REFERENCES `items` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
