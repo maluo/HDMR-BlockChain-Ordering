@@ -11,7 +11,7 @@ import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"net.codejava.customer"})
+@EnableJpaRepositories(basePackages = {"HDMRORDERS.PORTAL.MODELS"})
 @EnableTransactionManagement
 public class JpaConfig {
     @Bean
