@@ -41,9 +41,11 @@ Need to start on it first before the complex algorithms.
 
 #### 1.Maven client based back-end with hibernate h2b - covert sql table to model entity - Done.
 
-#### 2.CRUD Portal with JPA and Srping Data Framework.
+#### 2.CRUD Portal back-end - done with Hibernate.
 
-#### 3.Start Hadoop on client side.
+#### 3.Spring MVC failed, would go for Servlet and JSP on the portal - save to tomorrow
+
+#### 4.Start Hadoop on client side - focus on this part, need to get this major part as of tonight.
 
 ## Deploy service components onto enterprise application servers.
 
