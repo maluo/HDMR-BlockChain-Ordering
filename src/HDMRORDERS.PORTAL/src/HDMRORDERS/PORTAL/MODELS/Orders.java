@@ -1,4 +1,4 @@
-package HDMRORDERS.CP630.HIBERNATE;
+package HDMRORDERS.PORTAL.MODELS;
 // Generated Dec 18, 2020 3:25:44 PM by Hibernate Tools 5.3.6.Final
 
 import java.util.Date;
@@ -18,6 +18,7 @@ public class Orders implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private Items items;
 	private String orderNum;
 	private Float unitPrice;
