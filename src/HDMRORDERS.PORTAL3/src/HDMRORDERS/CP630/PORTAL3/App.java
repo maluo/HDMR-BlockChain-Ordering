@@ -1,6 +1,5 @@
 package HDMRORDERS.CP630.PORTAL3;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +25,7 @@ public class App
     	ItemDao itemDao = ItemDaoIMPL.getInstance();
         
     	String orderNum = "O0008-0003";
+    	String orderNum2 = "I0003";
     	Float unitPrice = Float.valueOf(0);
     	Integer quantity = 0;
     	Float balance = Float.valueOf(0);
@@ -35,7 +35,7 @@ public class App
     	Float grossIncome = Float.valueOf(0);
     	Items item = itemDao.findItemById(1);
     	
-    	Orders o = new Orders(orderNum,unitPrice,quantity,balance,shipping,salesPrice,subtotal,grossIncome);
+    	Orders o = new Orders(orderNum,orderNum2,unitPrice,quantity,balance,shipping,salesPrice,subtotal,grossIncome);
     	o.setTransactionDate(GlobalFunc.convertStrToDdate("20/05/2020"));
     	o.setItems(item);
     	
@@ -44,11 +44,13 @@ public class App
     	//orderDao.saveOrder(o);//Insertion Done
     	
     	List<Orders> orders = orderDao.findAllOrders();
+    	System.out.println(orders.get(10).getOrderNum());
+    	System.out.println(orders.get(10).getOrderNum2());
     	orders = orders.stream().filter(x -> x.getOrderNum().contains("O")).collect(Collectors.toList());
-    	System.out.println(orders.get(0).getItems().getProductId());
+    	System.out.println(orders.size());
     	
-    	//orderDao.deleteOrder(100);//The one just inserted - Done.  Ready to go for the jsp portal
-    	
+    	//orderDao.deleteOrder(98);//The one just inserted - Done.  Ready to go for the jsp portal
+    	//orderDao.deleteOrder(99);//The one just inserted - Done.  Ready to go for the jsp portal
     	
     }
 }

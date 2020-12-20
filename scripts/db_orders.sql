@@ -46,6 +46,7 @@ CREATE TABLE `items` (
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `order_num` varchar(255) DEFAULT NULL,
+  `order_num_post` varchar(255) DEFAULT NULL,
   `item_num` int(11) DEFAULT NULL,
   `unit_price` float DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,

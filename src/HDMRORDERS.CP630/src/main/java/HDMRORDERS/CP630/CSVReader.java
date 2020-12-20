@@ -26,13 +26,14 @@ public class CSVReader {
 		csvFilePath = (option == 0) ? Util.orderPath
 				: Util.itemPath;
 		sql = (option == 0)
-				? "INSERT INTO orders (order_num,item_num,unit_price,quantity,balance,shipping,sales_price,subtotal,gross_income,transaction_date) VALUES (?,?,?,?,?,?,?,?,?,?)"
+				? "INSERT INTO orders (order_num,order_num_post,item_num,unit_price,quantity,balance,shipping,sales_price,subtotal,gross_income,transaction_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
 				: "INSERT INTO items (product_id,product_name,quantity,comments) VALUES (?,?,?,?)";
 
 		int batchSize = 20;
 		Connection connection = null;
 
 		String order_num = "";
+		String order_num_2 = "";
 		/* Init variables */
 		int item_num = 0;
 		float unit_price = 0;
@@ -66,52 +67,54 @@ public class CSVReader {
 
 				case 0:
 					order_num = data[0];
+					order_num_2 = data[1];
 					try {
-						item_num = Integer.parseInt(data[1]);
+						item_num = Integer.parseInt(data[2]);
 					} catch (Exception e) {
 					}
 
-					unit_price = Float.parseFloat(data[2]);
+					unit_price = Float.parseFloat(data[3]);
 					try {
-						quantity = Integer.parseInt(data[3]);
+						quantity = Integer.parseInt(data[4]);
 					} catch (Exception e) {
 					}
 					try {
-						balance = Float.parseFloat(data[4]);
-					} catch (Exception e) {
-					}
-
-					try {
-						shipping = Float.parseFloat(data[5]);
+						balance = Float.parseFloat(data[5]);
 					} catch (Exception e) {
 					}
 
 					try {
-						sales_price = Float.parseFloat(data[6]);
+						shipping = Float.parseFloat(data[6]);
 					} catch (Exception e) {
 					}
-					subtotal = Float.parseFloat(data[7]);
-					gross_income = Float.parseFloat(data[8]);
+
 					try {
-						transaction_date = data[9];
+						sales_price = Float.parseFloat(data[7]);
+					} catch (Exception e) {
+					}
+					subtotal = Float.parseFloat(data[8]);
+					gross_income = Float.parseFloat(data[9]);
+					try {
+						transaction_date = data[10];
 					} catch (Exception e) {
 					}
 					statement.setString(1, order_num);
-					statement.setInt(2, item_num);
-					statement.setFloat(3, unit_price);
-					statement.setInt(4, quantity);
-					statement.setFloat(5, balance);
-					statement.setFloat(6, shipping);
-					statement.setFloat(7, sales_price);
-					statement.setFloat(8, subtotal);
-					statement.setFloat(9, gross_income);
+					statement.setString(2, order_num_2);
+					statement.setInt(3, item_num);
+					statement.setFloat(4, unit_price);
+					statement.setInt(5, quantity);
+					statement.setFloat(6, balance);
+					statement.setFloat(7, shipping);
+					statement.setFloat(8, sales_price);
+					statement.setFloat(9, subtotal);
+					statement.setFloat(10, gross_income);
 					Timestamp sqlTimestamp = null;
 
 					try {
 						sqlTimestamp = Timestamp.valueOf(Util.convertStringToTS(transaction_date));
 					} catch (Exception e) {
 					}
-					statement.setTimestamp(10, sqlTimestamp);
+					statement.setTimestamp(11, sqlTimestamp);
 					break;
 				case 1:
 					product_id = Integer.parseInt(data[0]);

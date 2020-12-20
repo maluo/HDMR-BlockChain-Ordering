@@ -6,9 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import HDMRORDERS.CP630.PORTAL3.DAO.ItemDao;
-import HDMRORDERS.CP630.PORTAL3.DAO.OrderDao;
 import HDMRORDERS.CP630.PORTAL3.DOMAIN.Items;
-import HDMRORDERS.CP630.PORTAL3.DOMAIN.Orders;
 import HDMRORDERS.CP630.PORTAL3.UTIL.HibernateUtil;
 
 public class ItemDaoIMPL implements ItemDao{

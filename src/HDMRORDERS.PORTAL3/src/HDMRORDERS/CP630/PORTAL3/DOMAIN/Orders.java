@@ -26,6 +26,7 @@ public class Orders implements java.io.Serializable {
 	private Integer id;
 	private Items items;
 	private String orderNum;
+	private String orderNumPost;
 	private Float unitPrice;
 	private Integer quantity;
 	private Float balance;
@@ -40,6 +41,21 @@ public class Orders implements java.io.Serializable {
 	}
 
 	public Orders(Date transactionDate, Date sysDate) {
+		this.transactionDate = transactionDate;
+		this.sysDate = sysDate;
+	}
+	
+	public Orders(String orderNum, String orderNumPost, Float unitPrice, Integer quantity, Float balance, Float shipping,
+			Float salesPrice, Float subtotal, Float grossIncome) {
+		this.orderNum = orderNum;
+		this.orderNumPost = orderNumPost;
+		this.unitPrice = unitPrice;
+		this.quantity = quantity;
+		this.balance = balance;
+		this.shipping = shipping;
+		this.salesPrice = salesPrice;
+		this.subtotal = subtotal;
+		this.grossIncome = grossIncome;
 		this.transactionDate = transactionDate;
 		this.sysDate = sysDate;
 	}
@@ -115,6 +131,15 @@ public class Orders implements java.io.Serializable {
 
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
+	}
+	
+	@Column(name = "order_num_post")
+	public String getOrderNum2() {
+		return this.orderNumPost;
+	}
+
+	public void setOrderNum2(String orderNumPost) {
+		this.orderNumPost = orderNumPost;
 	}
 
 	@Column(name = "unit_price", precision = 12, scale = 0)
@@ -203,4 +228,3 @@ public class Orders implements java.io.Serializable {
 	}
 
 }
-

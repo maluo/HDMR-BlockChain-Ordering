@@ -85,6 +85,7 @@
         <tr>
             <th>ID</th>
 			<th>Order Number</th>
+			<th>Import Order Number</th>
 			<th>Item Number</th>
 			<th>Unit Price</th>
 			<th>Quantity</th>
@@ -102,6 +103,7 @@
             <tr>
                 <td>${order.getId()}</td>
 				<td>${order.getOrderNum()}</td>
+				<td>${order.getOrderNum2()}</td>
 				<td>${order.getItems().getProductId()}</td>
 				<td>${order.getUnitPrice()}</td>
 				<td>${order.getQuantity()}</td>
