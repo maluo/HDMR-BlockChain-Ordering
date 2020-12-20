@@ -108,7 +108,7 @@ public class Items implements java.io.Serializable {
 		this.sysDate = sysDate;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "items")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "items")
 	public Set<Orders> getOrderses() {
 		return this.orderses;
 	}

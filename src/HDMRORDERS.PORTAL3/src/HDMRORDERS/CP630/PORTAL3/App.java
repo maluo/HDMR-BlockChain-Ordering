@@ -44,12 +44,10 @@ public class App
     	//orderDao.saveOrder(o);//Insertion Done
     	
     	List<Orders> orders = orderDao.findAllOrders();
+    	orders = orders.stream().filter(x -> x.getOrderNum().contains("O")).collect(Collectors.toList());
+    	System.out.println(orders.get(0).getItems().getProductId());
     	
-    	orders = orders.stream().filter(x -> x.getOrderNum().contains("I")).collect(Collectors.toList());
-    	
-    	System.out.println(orders.size());
-    	
-    	//orderDao.deleteOrder(98);//The one just inserted - Done.  Ready to go for the jsp portal
+    	//orderDao.deleteOrder(100);//The one just inserted - Done.  Ready to go for the jsp portal
     	
     	
     }

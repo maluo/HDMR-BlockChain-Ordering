@@ -23,8 +23,8 @@ public class CSVReader {
 		String sql = "";
 		String csvFilePath = "";
 
-		csvFilePath = (option == 0) ? "C:\\Users\\james\\Desktop\\cp630\\HDMR-BlockChain-Ordering\\data\\orders.csv"
-				: "C:\\Users\\james\\Desktop\\cp630\\HDMR-BlockChain-Ordering\\data\\items.csv";
+		csvFilePath = (option == 0) ? Util.orderPath
+				: Util.itemPath;
 		sql = (option == 0)
 				? "INSERT INTO orders (order_num,item_num,unit_price,quantity,balance,shipping,sales_price,subtotal,gross_income,transaction_date) VALUES (?,?,?,?,?,?,?,?,?,?)"
 				: "INSERT INTO items (product_id,product_name,quantity,comments) VALUES (?,?,?,?)";

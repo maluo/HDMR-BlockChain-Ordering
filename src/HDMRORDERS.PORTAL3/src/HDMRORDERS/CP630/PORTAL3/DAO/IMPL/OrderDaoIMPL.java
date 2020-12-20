@@ -16,11 +16,11 @@ public class OrderDaoIMPL implements OrderDao {
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 	@Override
-	public long saveOrder(Orders order) {
+	public Integer saveOrder(Orders order) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Long id = (Long) session.save(order);
+		Integer id = (Integer) session.save(order);
 		transaction.commit();
 		session.close();
 		return id;

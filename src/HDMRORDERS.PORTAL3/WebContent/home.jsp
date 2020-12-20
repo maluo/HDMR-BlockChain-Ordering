@@ -16,9 +16,10 @@
         min-width: 70%;
         border: 1px solid #CCC;
         border-collapse: collapse;
+        margin: 0 auto;
     }
     table tr{line-height: 30px;}
-    table tr th { background: #000033; color: #FFF;}
+    table tr th { background: #000033; color: #FFF; padding: 20px;}
     table tr td { border:1px solid #CCC; margin: 5px;}
     input[type=text], input[type=email], input[type=tel]{
         min-width: 60%;
@@ -79,7 +80,7 @@
     -->
     
     <h1>List of Orders</h1>
-    <!-- 
+    
     <table>
         <tr>
             <th>ID</th>
@@ -97,19 +98,20 @@
             <th>Update</th>
             <th>Delete</th>
         </tr>
-        <c:forEach items="${'${'}orderList}" var="order">
+        <c:forEach items="${orderList}" var="order">
             <tr>
-                <td>${'${'}order.getId()}</td>
-				<td>${'${'}order.getOrderNum()}</td>
-				<td>${'${'}order.getUnitPrice()}</td>
-				<td>${'${'}order.getQuantity()}</td>
-				<td>${'${'}order.getBalance()}</td>
-				<td>${'${'}order.getShipping()}</td>
-				<td>${'${'}order.getSalesPrice()}</td>
-				<td>${'${'}order.getSubtotal()}</td>
-				<td>${'${'}order.getGrossIncome()}</td>
-				<td>${'${'}order.getTransactionDate()}</td>
-				<td>${'${'}order.getSysDate()}</td>
+                <td>${order.getId()}</td>
+				<td>${order.getOrderNum()}</td>
+				<td>${order.getItems().getProductId()}</td>
+				<td>${order.getUnitPrice()}</td>
+				<td>${order.getQuantity()}</td>
+				<td>${order.getBalance()}</td>
+				<td>${order.getShipping()}</td>
+				<td>${order.getSalesPrice()}</td>
+				<td>${order.getSubtotal()}</td>
+				<td>${order.getGrossIncome()}</td>
+				<td>${order.getTransactionDate()}</td>
+				<td>${order.getSysDate()}</td>
                  
                 <td>
                     <form action="<c:url value="/customer/update"/>" method="post">
@@ -125,6 +127,6 @@
             </tr>
         </c:forEach>
     </table>
-     -->
+     
 </body>
 </html>

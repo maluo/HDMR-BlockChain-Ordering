@@ -6,7 +6,7 @@ import HDMRORDERS.CP630.PORTAL3.DOMAIN.Orders;
 
 public interface OrderDao {
 	
-	long saveOrder(Orders order);
+	Integer saveOrder(Orders order);
 
 	void updateOrder(Orders order);
 
