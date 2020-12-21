@@ -1,4 +1,0 @@
-Hello Hadoop
-Hello HDFS
-Hello MapReduce
-this is a test
