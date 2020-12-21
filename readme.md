@@ -11,45 +11,45 @@ Data is from a real world example on facebook market store.  The importing and s
 
 ### HDSF Map-Reduce Service points:
 
-1. Balancing - do an overall count and see if we have unfinished items in stock or missing some new orders.
+1. Profit service - over all sum and get the profit.
 
-2. Profit service - over all sum and get the profit.
+2. Scala Planing service (0/1 Knapsack) - Generate a Map-Reduce model giving price and profit value for each item, give a best strategy based on the budget.  We could include size of the product and give stock size as another feature for multi-dimentional Knapsack, which is super popular these days, but they will cost way more time as we are doing the research.  An example for this would be given in the [Elephant56](https://github.com/pasqualesalza/elephant56) We could do data clean up and map them back to a 3 3NF tables in mysql, but I strongly feel like No-sql reseach will push data solution forward.  Tese cases would be build to make sure we have the proper result before pushing the service to WAR file.
 
-3. Scala Planing service (0/1 Knapsack) - Generate a Map-Reduce model giving price and profit value for each item, give a best strategy based on the budget.  We could include size of the product and give stock size as another feature for multi-dimentional Knapsack, which is super popular these days, but they will cost way more time as we are doing the research.  An example for this would be given in the [Elephant56](https://github.com/pasqualesalza/elephant56) We could do data clean up and map them back to a 3 3NF tables in mysql, but I strongly feel like No-sql reseach will push data solution forward.  Tese cases would be build to make sure we have the proper result before pushing the service to WAR file.
+## Develop and implement data application algorithms for the proposed application problem. - Done. [30/30/*]
 
-## Develop and implement data application algorithms for the proposed application problem. - Done. [0/30/*]
-
-I don't want to mention too much for the JPA and H2B Hibernate part which relies on the Eclipse Tools and Java Framework.
-
-The interesting point here is the Map-Reduce algorithms.
+I don't want to mention too much for the JSP and Hibernate part which relies on the Eclipse Tools and Java Framework.  The interesting point here is the Map-Reduce algorithms.  Basically, a portal is implemented and we can perform operations on the order list.
 
 ## Do data computing to generate models, representing models in portable format and stored in file or database. More credit is given if distributed approach is used data mining of big dataset
 
-Write a short description (including the new features). working on it.
+We would use Hadoop API and Spark API cause we need to integrate this section to beans and call it with soap service from portal side.
 
-Balancing:
+### Profit service:
 
-Profit service:
+#### 1.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price for that imported item order to part-r-0001, and keep values positive.
 
-Scala planing service:
+#### 2.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price for importing to part-r-0002, and keep values negative.
+
+#### 3.<item_num,unit_price> reduction - store avg profit for each item.  If negative which means it is never sold.
+
+### Scala planing service:
+
+#### 1.Based on step 3. result, we would could do a 0/1 knapsack with a given budget.
 
 ## Create deployable service components using application models using Java based enterprise computing technologies, to create client program to do remote call of the data mining services.
-
-Need to start on it first before the complex algorithms.
 
 ### Task breakdown:
 
 #### 1.Maven client based back-end with hibernate h2b - covert sql table to model entity - Done.
 
-#### 2.CRUD Portal back-end - done with Hibernate.
+#### 2.CRUD Portal back-end - done with Hibernate. - Done.
 
-#### 3.Spring MVC failed, would go for Servlet and JSP on the portal - save to tomorrow
+#### 3.Spring MVC failed, would go for Servlet and JSP on the portal - Done.
 
 #### 4.Start Hadoop on client side - focus on this part, need to get this major part as of tonight.
 
 ## Deploy service components onto enterprise application servers.
 
-Write a short description (including the new features).
+Portal deployed.  Working on the Hadoop and Spark client API.  Need to inject EJB and call with SOAP service from portal side.
 
 ### Task breakdown:
 
