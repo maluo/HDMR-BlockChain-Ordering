@@ -23,7 +23,7 @@ I don't want to mention too much for the JSP and Hibernate part which relies on 
 
 We would use Hadoop API and Spark API cause we need to integrate this section to beans and call it with soap service from portal side.
 
-### Profit service:
+### Profit Service:
 
 #### 1.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price for that imported item order to part-r-0001, and keep values positive.
 
@@ -31,9 +31,9 @@ We would use Hadoop API and Spark API cause we need to integrate this section to
 
 #### 3.<item_num,unit_price> reduction - store avg profit for each item.  If negative which means it is never sold.
 
-### Scala planing service:
+### Scala Planing Service:
 
-#### 1.Based on step 3. result, we would could do a 0/1 knapsack with a given budget.
+#### 1.Based on step 3. result from Profit Service, we would could do a 0/1 knapsack with a given budget.
 
 ## Create deployable service components using application models using Java based enterprise computing technologies, to create client program to do remote call of the data mining services.
 
