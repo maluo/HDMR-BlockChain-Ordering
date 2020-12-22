@@ -49,9 +49,48 @@ We would use Hadoop API and Spark API cause we need to integrate this section to
 
 #### 1.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price for that imported item order to part-r-0001, and keep values positive.
 
+```
+        Function<Orders, List<Object>> compositeKey = orderRecord -> Arrays.<Object>asList(orderRecord.getOrderNum2(),
+                orderRecord.getItems().getProductId());
+
+        Map<List<Object>, Double> mapOut = out.stream().collect(
+                Collectors.groupingBy(compositeKey, Collectors.averagingDouble(orderR -> orderR.getUnitPrice())));
+
+        List<Tuple> tuples = new ArrayList<Tuple>();
+        for (Entry<List<Object>, Double> entry : mapOut.entrySet()) {
+            tuples.add(new Tuple(entry.getKey().toArray()[0].toString(), (int) entry.getKey().toArray()[1],
+                    (Double) entry.getValue()));
+        }
+
+        Map<Integer, Double> sales = tuples.stream().collect(
+                Collectors.groupingBy(record -> record.item_num, Collectors.averagingDouble(orderR -> orderR.profit)));
+```
+
 #### 2.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price for importing to part-r-0002, and keep values negative.
 
+```
+        Map<List<Object>, Double> mapIn = in.stream().collect(
+                Collectors.groupingBy(compositeKey, Collectors.averagingDouble(orderR -> orderR.getUnitPrice())));
+
+        tuples = new ArrayList<Tuple>();
+        for (Entry<List<Object>, Double> entry : mapIn.entrySet()) {
+            tuples.add(new Tuple(entry.getKey().toArray()[0].toString(), (int) entry.getKey().toArray()[1],
+                    -(Double) entry.getValue()));
+        }
+        Map<Integer, Double> buget_In = tuples.stream().collect(
+                Collectors.groupingBy(record -> record.item_num, Collectors.averagingDouble(orderR -> orderR.profit)));
+```
+
 #### 3.<item_num,unit_price> reduction - store avg profit for each item.  If negative which means it is never sold.
+
+```
+        Map<Integer, Double> combined = new HashMap<Integer, Double>();
+        double profit = 0;
+        for (Entry<Integer, Double> entry : sales.entrySet()) {
+            profit = entry.getValue() + buget_In.get(entry.getKey());
+            combined.put(entry.getKey(), profit);
+        }
+```
 
 ### Scala Planing Service:
 
