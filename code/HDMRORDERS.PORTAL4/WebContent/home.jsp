@@ -36,7 +36,7 @@
 </style>
 </head>
 <body>
-    <h1>Servlet, JSP and Hibernate CRUD Operations</h1>
+    <h1>Inventory Management and Consulting Service</h1>
     
     <c:url value="/order/register" var="registerUrl" />
     <form action="${registerUrl}" method="post">
