@@ -1,4 +1,4 @@
-package HDMRORDERS.PORTAL4.DOMAIN;
+package HDMRORDERS.DB.DOMAIN;
 
 public class Tuple {
 	 public String orderNum;

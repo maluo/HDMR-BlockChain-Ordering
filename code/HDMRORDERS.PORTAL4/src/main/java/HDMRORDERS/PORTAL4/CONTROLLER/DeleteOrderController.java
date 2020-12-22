@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import HDMRORDERS.PORTAL4.DAO.CustomerDao;
-import HDMRORDERS.PORTAL4.DAO.OrderDao;
-import HDMRORDERS.PORTAL4.DAO.IMPL.CustomerDaoImpl;
-import HDMRORDERS.PORTAL4.DAO.IMPL.OrderDaoIMPL;
+import HDMRORDERS.DB.DAO.OrderDao;
+import HDMRORDERS.DB.DAO.IMPL.OrderDaoIMPL;
+
 
 @WebServlet("/order/delete")
 public class DeleteOrderController extends HttpServlet {
@@ -25,7 +24,7 @@ public class DeleteOrderController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String custId = request.getParameter("orderId");
+		String custId = request.getParameter("orderid");
 
 		if (custId == "" || custId == null)
 			request.getRequestDispatcher("/").forward(request, response);

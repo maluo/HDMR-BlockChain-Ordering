@@ -11,7 +11,7 @@ import HDMRORDERS.DB.UTIL.GlobalFunc;
 public class App {
 	public static void main(String[] args) {
 		// System.out.println( "Hello World!" );
-		
+		@SuppressWarnings("unused")
 		OrderDao orderDao = OrderDaoIMPL.getInstance();
 		ItemDao itemDao = ItemDaoIMPL.getInstance();
 
@@ -33,7 +33,7 @@ public class App {
 
 		//Orders o1 = orderDao.findOrderById(92);
 		//System.out.println(o1.getItems().getProductId());
-		System.out.println(orderDao.OrderProfitService());
+		orderDao.OrderProfitService();
 		
 		
 		//dp starts here

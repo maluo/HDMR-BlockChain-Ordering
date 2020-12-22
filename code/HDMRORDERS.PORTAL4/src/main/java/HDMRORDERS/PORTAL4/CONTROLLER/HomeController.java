@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import HDMRORDERS.PORTAL4.DAO.OrderDao;
-import HDMRORDERS.PORTAL4.DAO.IMPL.OrderDaoIMPL;
-import HDMRORDERS.PORTAL4.DOMAIN.Orders;
+import HDMRORDERS.DB.DAO.OrderDao;
+import HDMRORDERS.DB.DAO.IMPL.OrderDaoIMPL;
+import HDMRORDERS.DB.DOMAIN.Orders;
  
 @WebServlet("/")
 public class HomeController extends HttpServlet {

@@ -1,4 +1,4 @@
-package HDMRORDERS.PORTAL4.UTIL;
+package HDMRORDERS.DB.UTIL;
 
 import java.sql.Timestamp;
 import java.text.ParseException;

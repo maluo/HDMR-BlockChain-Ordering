@@ -1,4 +1,4 @@
-package HDMRORDERS.PORTAL4.DOMAIN;
+package HDMRORDERS.DB.DOMAIN;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

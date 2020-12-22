@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Servlet, JSP and Hibernate CRUD Operations</title>
+<title>Ping & Ma Inventory</title>
  
 <style type="text/css">
     body{
@@ -37,47 +37,75 @@
 </head>
 <body>
     <h1>Servlet, JSP and Hibernate CRUD Operations</h1>
-    <!--  
-    <c:url value="/customer/register" var="registerUrl" />
-    <form action="${'${'}registerUrl}" method="post">
+    
+    <c:url value="/order/register" var="registerUrl" />
+    <form action="${registerUrl}" method="post">
         <table>
-            <c:if test="${'${'}customer.id ne null}">
+              
+            <c:if test="${order.getId() ne null}">
                 <tr>
-                <td>Customer ID:</td>
-                    <td><input type="text" name="id" value="${'${'}customer.id}" readonly="readonly"></td>
+                <td>ID:</td>
+                    <td><input type="text" name="id" value="${order.getId()}" readonly="readonly"></td>
                 </tr>
             </c:if>
+            
             <tr>
-                <td>First Name:</td>
-                <td><input type="text" name="firstName" value="${'${'}customer.firstName}" required></td>
+                <td>Order Number:</td>
+                <td><input type="text" name="order_num" value="${order.getOrderNum()}" required></td>
             </tr>
+            
             <tr>
-                <td>Last Name:</td>
-                <td><input type="text" name="lastName" value="${'${'}customer.lastName}" required></td>
+                <td>Import Number:</td>
+                <td><input type="text" name="order_num_post" value="${order.getOrderNum2()}" required></td>
             </tr>
+            
             <tr>
-                <td>Email:</td>
-                <td><input type="email" name="email" value="${'${'}customer.email}" required></td>
+                <td>Item Number</td>
+                <td><input type="text" name="item_num" value="${order.getItems().getProductId()}" readonly="readonly"></td>
             </tr>
+            
             <tr>
-                <td>Mobile:</td>
-                <td><input type="tel" pattern="[789][0-9]{9}" name="mobile" value="${'${'}customer.mobile}" required></td>
+                <td>Unit Price</td>
+                <td><input type="text" name="unit_price" value="${order.getUnitPrice()}" required></td>
             </tr>
+            
+            <tr>
+                <td>Quantity</td>
+                <td><input type="text" name="quantity" value="${order.getQuantity()}" required></td>
+            </tr>
+            
+            <tr>
+                <td>Shipping</td>
+                <td><input type="text" name="shipping" value="${order.getShipping()}" required></td>
+            </tr>
+            
+            <tr>
+                <td>Transaction Date</td>
+                <td><input type="text" name="transaction_date" value="${order.getTransactionDate()}" required></td>
+            </tr>
+            
+            <tr>
+                <td>Sys Date</td>
+                <td><input type="text" name="sys_date" value="${order.getSysDate()}" readonly="readonly"></td>
+            </tr>
+            
  
-            <c:if test="${'${'}customer.id ne null}">
+            <c:if test="${order.getId() ne null}">
                 <tr>
                     <td colspan="2"><input type="submit" value="Update"></td>
                 </tr>
             </c:if>
-            <c:if test="${'${'}customer.id eq null}">
+            
+            <c:if test="${order.getId() eq null}">
                 <tr>
                     <td colspan="2"><input type="submit" value="Save"></td>
                 </tr>
             </c:if>
+            
         </table>
     </form>
     <br>
-    -->
+    
     
     <h1>List of Orders</h1>
     
@@ -116,13 +144,13 @@
 				<td>${order.getSysDate()}</td>
                  
                 <td>
-                    <form action="<c:url value="/customer/update"/>" method="post">
-                        <input type="hidden" name="custId" value="${customer.id}">
+                    <form action="<c:url value="/order/update"/>" method="post">
+                        <input type="hidden" name="orderid" value="${order.getId()}">
                         <input type="submit" value="Update">
                     </form>
                 <td>
-                    <form action="<c:url value="/customer/delete"/>" method="post">
-                        <input type="hidden" name="custId" value="${customer.id}">
+                    <form action="<c:url value="/order/delete"/>" method="post">
+                        <input type="hidden" name="orderid" value="${order.getId()}">
                         <input style="background: #F00;" type="submit" value="Delete">
                     </form>
                 </td>

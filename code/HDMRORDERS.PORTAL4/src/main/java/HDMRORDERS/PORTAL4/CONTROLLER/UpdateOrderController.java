@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import HDMRORDERS.PORTAL4.DAO.OrderDao;
-import HDMRORDERS.PORTAL4.DAO.IMPL.OrderDaoIMPL;
-import HDMRORDERS.PORTAL4.DOMAIN.Orders;
+import HDMRORDERS.DB.DAO.OrderDao;
+import HDMRORDERS.DB.DAO.IMPL.OrderDaoIMPL;
+import HDMRORDERS.DB.DOMAIN.Orders;
 
 @WebServlet("/order/update")
 public class UpdateOrderController extends HttpServlet {
@@ -24,14 +24,14 @@ public class UpdateOrderController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String custId = request.getParameter("orderId");
+		String orderId = request.getParameter("orderid");
 
-		if (custId == "" || custId == null)
+		if (orderId == "" ||orderId == null)
 			request.getRequestDispatcher("/").forward(request, response);
 		else {
-			Integer id = Integer.parseInt(custId);
-			Orders customer = orderDao.findOrderById(id);
-			request.setAttribute("order", customer);
+			Integer id = Integer.parseInt(orderId);
+			Orders order = orderDao.findOrderById(id);
+			request.setAttribute("order", order);
 
 			request.getRequestDispatcher("/").forward(request, response);
 		}

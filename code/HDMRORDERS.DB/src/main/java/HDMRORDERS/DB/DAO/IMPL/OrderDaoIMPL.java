@@ -1,31 +1,29 @@
-package HDMRORDERS.PORTAL4.DAO.IMPL;
+package HDMRORDERS.DB.DAO.IMPL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import HDMRORDERS.PORTAL4.DAO.OrderDao;
-import HDMRORDERS.PORTAL4.DOMAIN.Orders;
-import HDMRORDERS.PORTAL4.DOMAIN.Tuple;
-import HDMRORDERS.PORTAL4.UTIL.HibernateUtil;
+import HDMRORDERS.DB.DAO.OrderDao;
+import HDMRORDERS.DB.DOMAIN.Orders;
+import HDMRORDERS.DB.DOMAIN.Tuple;
+import HDMRORDERS.DB.UTIL.HibernateUtil;
 
 public class OrderDaoIMPL implements OrderDao {
 
 	private static OrderDaoIMPL orderDaoImpl = null;
 	private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	@Override
+	
 	public Integer saveOrder(Orders order) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
@@ -36,7 +34,7 @@ public class OrderDaoIMPL implements OrderDao {
 		return id;
 	}
 
-	@Override
+	
 	public void updateOrder(Orders order) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
@@ -47,7 +45,7 @@ public class OrderDaoIMPL implements OrderDao {
 
 	}
 
-	@Override
+	
 	public void deleteOrder(Integer id) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
@@ -58,7 +56,7 @@ public class OrderDaoIMPL implements OrderDao {
 		session.close();
 	}
 
-	@Override
+	
 	public Orders findOrderById(Integer id) {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();
@@ -68,7 +66,7 @@ public class OrderDaoIMPL implements OrderDao {
 		return order;
 	}
 
-	@Override
+	
 	public List<Orders> findAllOrders() {
 		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.openSession();

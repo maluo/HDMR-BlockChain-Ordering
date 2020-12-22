@@ -1,9 +1,9 @@
-package HDMRORDERS.PORTAL4.DAO;
+package HDMRORDERS.DB.DAO;
 
 import java.util.List;
 import java.util.Map;
 
-import HDMRORDERS.PORTAL4.DOMAIN.Orders;
+import HDMRORDERS.DB.DOMAIN.Orders;
 
 public interface OrderDao {
 	

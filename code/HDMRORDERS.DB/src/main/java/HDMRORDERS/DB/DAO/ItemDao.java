@@ -1,8 +1,8 @@
-package HDMRORDERS.PORTAL4.DAO;
+package HDMRORDERS.DB.DAO;
 
 import java.util.List;
 
-import HDMRORDERS.PORTAL4.DOMAIN.Items;
+import HDMRORDERS.DB.DOMAIN.Items;
 
 public interface ItemDao {
 	

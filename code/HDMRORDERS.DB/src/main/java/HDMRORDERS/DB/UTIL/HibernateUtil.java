@@ -1,4 +1,4 @@
-package HDMRORDERS.PORTAL4.UTIL;
+package HDMRORDERS.DB.UTIL;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
