@@ -47,7 +47,9 @@ We would use Hadoop API and Spark API cause we need to integrate this section to
 
 ### Profit Service:
 
-#### 1.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price for that imported item order to part-r-0001, and keep values positive.
+Tried to implement this concept in Hadoop, but turns out Java Stream is also a good approach.
+
+#### 1.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price, and keep values positive.
 
 ```
         Function<Orders, List<Object>> compositeKey = orderRecord -> Arrays.<Object>asList(orderRecord.getOrderNum2(),
@@ -66,7 +68,7 @@ We would use Hadoop API and Spark API cause we need to integrate this section to
                 Collectors.groupingBy(record -> record.item_num, Collectors.averagingDouble(orderR -> orderR.profit)));
 ```
 
-#### 2.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price for importing to part-r-0002, and keep values negative.
+#### 2.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price, and keep values negative.
 
 ```
         Map<List<Object>, Double> mapIn = in.stream().collect(
