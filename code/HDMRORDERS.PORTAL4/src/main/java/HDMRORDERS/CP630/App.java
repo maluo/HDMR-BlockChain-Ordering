@@ -1,8 +1,11 @@
 package HDMRORDERS.CP630;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -38,64 +41,22 @@ public class App {
 		o.setTransactionDate(GlobalFunc.convertStrToDdate("20/05/2020"));
 		o.setItems(item);
 
-		//System.out.println(item.getProductName());// Tested
-		// orderDao.saveOrder(o);//Insertion Done
+		//Orders o1 = orderDao.findOrderById(92);
+		//System.out.println(o1.getItems().getProductId());
+		orderDao.OrderProfitService();
+		
+		
+		//dp starts here
+		
+		// Restful service vs Scala, Apply 0/1 knapsack in JAVA first, could use Scala
+		// later
 
-		List<Orders> orders = orderDao.findAllOrders();
-		//System.out.println(orders.get(10).getOrderNum());
-		//System.out.println(orders.get(10).getOrderNum2());
-		
-		/*Well done map reduce tricks with Java programming : )*/
-		Function<Orders, List<Object>> compositeKey = orderRecord ->
-	    Arrays.<Object>asList(orderRecord.getOrderNum2(), orderRecord.getItems().getProductId());
-	    
-	    //Filter sales orders
-	    Map<List<Object>, Double> map =
-	    		orders.stream().collect(Collectors.groupingBy(compositeKey, Collectors.averagingDouble(orderR -> orderR.getUnitPrice())));
-	    //Filter importing orders
-	    
-	    //Join orders and reduce as the final result
-	    //join the two result set and make an result set class called tuple
-	    
-	    //convert to a single Tuple list
-	    
-	    Function<Tuple, List<Object>> singleKey = record -> Arrays.<Object>asList(record.item_num);
-	    
-	    //Prints out input for Knapsack to a csv file on a shared space - model object
-	    
-	    //Restful service vs Scala, Apply 0/1 knapsack in JAVA first, could use Scala later
-	    
-	    /*End of pricing stragegy*/
-	    System.out.println(map);;
-		
-		//List<Orders> out = orders.stream().filter(x -> x.getOrderNum().contains("O")).collect(Collectors.toList());
-		//List<Orders> in = orders.stream().filter(x -> x.getOrderNum().contains("I")).collect(Collectors.toList());
-		//Map<String, List<Orders>> orderByImport;
-		//orderByImport = out.stream().collect(groupingBy(x -> x.get));
-		
-		/*
-		 * Table<String, String, Orders> table = orders.stream().collect(Tables.toTable(
-		 * Orders::get, o.getOrderNum2(), o.getUnitPrice() ));
-		 */
+		// Rest service to call some background cmd running like Scala, or db_script
+		// upload
 
-		//Table<String, String, Float> table = HashBasedTable.create();
-		//for (Orders o1 : orders) {
-			//table.put(o1.getOrderNum(), o1.getOrderNum2(),
-					//(o1.getOrderNum().contains("I")) ? -o1.getUnitPrice() : o1.getUnitPrice());
-		//}
-		
-		//orders.stream().parallel().collect(Collectors.groupingBy(order::getOrderNum(),order::getOrderNum2()));
-		// p));
-		
-		//Map<Tuple, List<Orders>> ordersMapping = orders.stream().parallel()
-				  //.collect(groupingBy(Orders :: getOrderNum()));
+		// Get resource ready for the rest backend : )
 
-		//System.out.println(table);
-
-		// orderDao.deleteOrder(98);//The one just inserted - Done. Ready to go for the
-		// jsp portal
-		// orderDao.deleteOrder(99);//The one just inserted - Done. Ready to go for the
-		// jsp portal
+		/* End of pricing stragegy */
 
 	}
 }

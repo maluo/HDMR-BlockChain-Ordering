@@ -8,31 +8,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import HDMRORDERS.PORTAL4.DAO.CustomerDao;
-import HDMRORDERS.PORTAL4.DAO.IMPL.CustomerDaoImpl;
+import HDMRORDERS.PORTAL4.DAO.OrderDao;
+import HDMRORDERS.PORTAL4.DAO.IMPL.OrderDaoIMPL;
+import HDMRORDERS.PORTAL4.DOMAIN.Orders;
 
-@WebServlet("/customer/delete")
-public class DeleteCustomerController extends HttpServlet {
+@WebServlet("/order/update")
+public class UpdateOrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public DeleteCustomerController() {
+	private OrderDao orderDao = OrderDaoIMPL.getInstance();
+	
+	public UpdateOrderController() {
 		// Do Nothing
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String custId = request.getParameter("custId");
+		String custId = request.getParameter("orderId");
 
 		if (custId == "" || custId == null)
 			request.getRequestDispatcher("/").forward(request, response);
 		else {
-			Long id = Long.parseLong(custId);
-			CustomerDao customerDao = CustomerDaoImpl.getInstance();
+			Integer id = Integer.parseInt(custId);
+			Orders customer = orderDao.findOrderById(id);
+			request.setAttribute("order", customer);
 
-			customerDao.deleteCustomer(id);
-
-			response.sendRedirect(request.getContextPath() + "/");
+			request.getRequestDispatcher("/").forward(request, response);
 		}
 	}
 }

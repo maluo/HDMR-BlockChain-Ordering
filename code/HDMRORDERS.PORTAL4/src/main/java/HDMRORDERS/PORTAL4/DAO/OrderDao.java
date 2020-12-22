@@ -1,6 +1,7 @@
 package HDMRORDERS.PORTAL4.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import HDMRORDERS.PORTAL4.DOMAIN.Orders;
 
@@ -15,5 +16,7 @@ public interface OrderDao {
 	Orders findOrderById(Integer id);
 
 	List<Orders> findAllOrders();
+	
+	Map<Integer, Double> OrderProfitService();
 
 }
