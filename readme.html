@@ -1,0 +1,160 @@
+<h1 id="cp630-final-project">CP630 Final Project</h1>
+<h2 id="name-ma-luo">Name: Ma Luo</h2>
+<h2 id="email-luox1180mylauerier.ca">Email: luox1180@mylauerier.ca</h2>
+<h2 id="write-a-project-proposal-2-3-pages---done.-3030">Write a project proposal (2-3 pages) - Done. [30/30/*]</h2>
+<figure>
+<img src="screenshots/proposal.png" alt="Sequence Diagram From Proposal" /><figcaption>Sequence Diagram From Proposal</figcaption>
+</figure>
+<p>Done with the first version of proposal, will keep adding more functionalities here.</p>
+<h2 id="design-data-format-collect-data-create-dataset-for-the-application---done.-3030">Design data format, collect data, create dataset for the application - Done. [30/30/*]</h2>
+<p>Data is from a real world example on facebook market store. The importing and sales orders are sitting on the same dashboard which is a perfect example of semi-structured data. We have them exported from google sheet and would like to perform analysis on the dashboard. The service calculation would be totally rely on Map-Reduce algorithms. We have pulled two csv files as resources. <code>item.csv</code> is like an iventory, and <code>orders-split.csv</code> will be a dashboard for all the importing and exporting goods. The main purpose of this dashboard is to try a Block-chain styling of book keeping.</p>
+<figure>
+<img src="screenshots/sampledata.png" alt="Sample Data" /><figcaption>Sample Data</figcaption>
+</figure>
+<h2 id="develop-and-implement-data-application-algorithms-for-the-proposed-application-problem.---done.-3030">Develop and implement data application algorithms for the proposed application problem. - Done. [30/30/*]</h2>
+<p>I don’t want to mention too much for the JSP and Hibernate part which relies on the Eclipse Tools and Java Framework. The interesting point here is the Map-Reduce algorithms. Basically, a portal is implemented and we can perform operations on the order list. Map-reduce on keyword mappings would be the key logic in our computations.</p>
+<h3 id="map-reduce-service-points">Map-Reduce Service points:</h3>
+<h4 id="profit-service---over-all-sum-and-get-the-profit.-with-java-1.8-streams-this-time-need-to-gain-more-knowledge-on-the-hadoop-composite-key-implementation.">1. Profit service - over all sum and get the profit. With Java 1.8 Streams this time, need to gain more knowledge on the Hadoop composite key implementation.</h4>
+<h5 id="step-1.-line-1-and-2-are-the-importing-and-sales-value-respectively.-the-composite-key-is-importing-orderitem-number">Step 1. Line 1 and 2 are the importing and sales value respectively. The composite key is &lt;Importing Order,Item Number&gt;</h5>
+<p><code>{[I0022, 8]=72.0, [I0021, 3]=25.0, [I0020, 2]=13.0, [I0014, 7]=0.0, [I0013, 6]=0.0, [I0010, 5]=55.0, [I0024, 9]=13.0, [I0002, 2]=20.0, [I0001, 1]=10.0, [I0023, 3]=26.0, [I0012, 3]=30.0, [I0015, 7]=0.0, [I0019, 4]=17.329999923706055, [I0018, 3]=26.0, [I0016, 1]=0.0, [I0008, 4]=23.0, [I0017, 3]=27.0, [I0007, 5]=55.0, [I0005, 3]=30.0, [I0004, 2]=17.0, [I0003, 2]=19.0, [I0009, 2]=18.0}</code></p>
+<p><code>{[I0022, 8]=90.0, [I0021, 3]=38.333333333333336, [I0020, 2]=30.0, [I0010, 5]=77.0, [I0002, 2]=30.0, [I0001, 1]=10.0, [I0023, 3]=38.333333333333336, [I0012, 3]=50.0, [I0021, 2]=45.0, [I0016, 1]=15.272727272727273, [I0019, 4]=31.666666666666668, [I0018, 3]=48.42777760823568, [I0008, 4]=36.9975004196167, [I0015, 1]=12.5, [I0017, 3]=52.5, [I0007, 5]=70.0, [I0005, 3]=53.5, [I0004, 2]=29.285714285714285, [I0003, 2]=25.714285714285715, [I0009, 2]=35.0, [I0019, 2]=27.0}</code></p>
+<h5 id="step-2.-based-on-it-we-perform-a-reduction-and-list-our-the-result-as-line-1-and-2.-a-reduction-is-performed-and-this-result-is-item-numberblance-set.">Step 2. Based on it, we perform a reduction and list our the result as line 1 and 2. A reduction is performed and this result is &lt;Item Number,Blance&gt; set.</h5>
+<p><code>{1=-5.0, 2=-17.4, 3=-27.333333333333332, 4=-20.164999961853027, 5=-55.0, 6=0.0, 7=0.0, 8=-72.0, 9=-13.0}</code></p>
+<p><code>{1=12.590909090909092, 2=31.714285714285715, 3=46.849074045817055, 4=34.332083543141685, 5=73.5, 8=90.0}</code></p>
+<h5 id="step-3.-line-5-is-the-final-knapsack-input-we-will-have-a-rest-service-is-going-to-implement-for-it.">Step 3. Line 5 is the final knapsack input we will have, a rest service is going to implement for it.</h5>
+<p><code>{1=7.590909090909092, 2=14.314285714285717, 3=19.515740712483723, 4=14.167083581288658, 5=18.5, 8=18.0}</code></p>
+<h3 id="scala-planing-service-continous-knapsack">2. Scala Planing service (Continous Knapsack)</h3>
+<p>This part has been impelemented with java stream which also provides Map-Reduce based operations. Local machine is so struggling with Hadoop and Scala implementation.</p>
+<p>Basic idea is to generate a Map-Reduce model giving price and profit value for each item, give a best strategy based on the budget. We could include size of the product and give stock size as another feature for multi-dimentional Knapsack, which is super popular these days, but they will cost way more time as we are doing the research. An example for this would be given in the <a href="https://github.com/pasqualesalza/elephant56">Elephant56</a> We could do data clean up and map them back to a 3 3NF tables in mysql, but I strongly feel like No-sql reseach will push data solution forward. Tese cases would be build to make sure we have the proper result before pushing the service to WAR file.</p>
+<h2 id="do-data-computing-to-generate-models-representing-models-in-portable-format-and-stored-in-file-or-database.-more-credit-is-given-if-distributed-approach-is-used-data-mining-of-big-dataset">Do data computing to generate models, representing models in portable format and stored in file or database. More credit is given if distributed approach is used data mining of big dataset</h2>
+<p>We would like to use Hadoop API and Spark API cause we need to integrate this section to beans and call it with soap service from portal side. But as we struggled at local machine with Hadoop, we shift the core logic to portal side with Java Stream and Hibernate.</p>
+<figure>
+<img src="screenshots/orderrepo.png" alt="Portal Repo" /><figcaption>Portal Repo</figcaption>
+</figure>
+<h3 id="profit-service">Profit Service:</h3>
+<p>Tried to implement this concept in Hadoop, but turns out Java Stream is also a good approach.</p>
+<h4 id="order_num_postitem_numunit_price-reduction---store-avg-unit-price.">1.&lt;Order_Num_Post,item_num,unit_price&gt; reduction - store avg unit price.</h4>
+<pre><code>        public Map&lt;Integer,Double&gt; getSalesAvgPerItem(){
+
+        List&lt;Tuple&gt; tuples = new ArrayList&lt;Tuple&gt;();
+        List&lt;Orders&gt; out = orderDaoImpl.findAllOrders().stream().filter(x -&gt; (x.getOrderNum().contains(&quot;-&quot;)))
+                .collect(Collectors.toList());
+
+        Function&lt;Orders, List&lt;Object&gt;&gt; compositeKey = orderRecord -&gt; Arrays.&lt;Object&gt;asList(orderRecord.getOrderNum2(),
+                orderRecord.getItems().getProductId());
+
+        Map&lt;List&lt;Object&gt;, Double&gt; mapOut = out.stream().collect(
+                Collectors.groupingBy(compositeKey, Collectors.averagingDouble(orderR -&gt; orderR.getUnitPrice())));
+
+        for (Entry&lt;List&lt;Object&gt;, Double&gt; entry : mapOut.entrySet()) {
+            tuples.add(new Tuple(entry.getKey().toArray()[0].toString(), (int) entry.getKey().toArray()[1],
+                    (Double) entry.getValue()));
+        }
+
+        Map&lt;Integer, Double&gt; sales = tuples.stream().collect(
+                Collectors.groupingBy(record -&gt; record.item_num, Collectors.averagingDouble(orderR -&gt; orderR.profit)));
+
+        return sales;
+    }</code></pre>
+<h4 id="order_num_postitem_numunit_price-reduction---store-avg-unit-price-for-importing">2.&lt;Order_Num_Post,item_num,unit_price&gt; reduction - store avg unit price for importing</h4>
+<pre><code>    public Map&lt;Integer,Double&gt; getImportAvgPerItem(){
+
+        List&lt;Tuple&gt; tuples = new ArrayList&lt;Tuple&gt;();
+        List&lt;Orders&gt; in = orderDaoImpl.findAllOrders().stream().filter(x -&gt; x.getOrderNum().contains(&quot;I&quot;)).collect(Collectors.toList());
+
+        Function&lt;Orders, List&lt;Object&gt;&gt; compositeKey = orderRecord -&gt; Arrays.&lt;Object&gt;asList(orderRecord.getOrderNum2(),
+                orderRecord.getItems().getProductId());
+
+        Map&lt;List&lt;Object&gt;, Double&gt; mapIn = in.stream().collect(
+                Collectors.groupingBy(compositeKey, Collectors.averagingDouble(orderR -&gt; orderR.getUnitPrice())));
+
+        tuples = new ArrayList&lt;Tuple&gt;();
+        for (Entry&lt;List&lt;Object&gt;, Double&gt; entry : mapIn.entrySet()) {
+            tuples.add(new Tuple(entry.getKey().toArray()[0].toString(), (int) entry.getKey().toArray()[1],
+                    (Double) entry.getValue()));
+        }
+        Map&lt;Integer, Double&gt; buget_In = tuples.stream().collect(
+                Collectors.groupingBy(record -&gt; record.item_num, Collectors.averagingDouble(orderR -&gt; orderR.profit)));
+
+        return buget_In;
+    }</code></pre>
+<h4 id="listitem_name-importing-price-sales-price-reduction-and-pass-this-one-to-knapsack-calculation">3. List&lt;item_name , importing price, sales price&gt; reduction and pass this one to Knapsack calculation</h4>
+<pre><code>    public List&lt;ItemUnit&gt; getKnapsackInput(){
+        Map&lt;Integer,Double&gt; budget_In, sales;
+        budget_In = getImportAvgPerItem();
+        sales = getSalesAvgPerItem();
+
+        Object[] keys = budget_In.keySet().toArray();
+        for (Object obj : keys) {
+            if (!sales.containsKey(obj)) {
+                budget_In.remove(obj);
+            }
+        }
+
+        List&lt;Items&gt; items= itemDaoImpl.findAllItems();
+        HashMap&lt;Integer,String&gt; itemMaps= new HashMap&lt;Integer,String&gt;();
+        for(Items i : items) {
+            itemMaps.put(i.getId(), i.getProductName());
+        }
+
+        List&lt;ItemUnit&gt; units= new ArrayList&lt;ItemUnit&gt;();
+        ItemUnit unit = null;
+        for (Entry&lt;Integer, String&gt; entry : itemMaps.entrySet()) {
+            try {
+            unit = new ItemUnit(entry.getValue(),budget_In.get(entry.getKey()),sales.get(entry.getKey()));
+            units.add(unit);
+            }catch(Exception e) {}
+        }
+
+        return units;
+    }</code></pre>
+<h4 id="based-on-step-3.-result-from-profit-service-we-would-could-do-a-continuous-knapsack-with-a-given-budget.">Based on step 3. result from Profit Service, we would could do a continuous knapsack with a given budget.</h4>
+<pre><code>    @WebServlet(&quot;/order/dash&quot;)
+    public class DashboardController extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+        private OrderDao orderDao = OrderDaoIMPL.getInstance();
+        OrderRepo repo = new OrderRepo();;
+
+        public DashboardController() {
+            // Do Nothing
+        }
+
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+
+                Integer budget = Integer.parseInt(request.getParameter(&quot;budget&quot;));
+
+                ContinousKnapsackWrapper o = new ContinousKnapsackWrapper(budget,repo.getKnapsackInput());
+
+                request.setAttribute(&quot;budgetPlan&quot;, o.getBuf());
+
+                request.getRequestDispatcher(&quot;/&quot;).forward(request, response);
+        }
+    }</code></pre>
+<h2 id="create-deployable-service-components-using-application-models-using-java-based-enterprise-computing-technologies-to-create-client-program-to-do-remote-call-of-the-data-mining-services.">Create deployable service components using application models using Java based enterprise computing technologies, to create client program to do remote call of the data mining services.</h2>
+<h3 id="task-breakdown">Task breakdown:</h3>
+<h4 id="maven-client-based-back-end-with-hibernate-h2b---covert-sql-table-to-model-entity---done.">1.Maven client based back-end with hibernate h2b - covert sql table to model entity - Done.</h4>
+<h4 id="crud-portal-back-end---done-with-hibernate.---done.">2.CRUD Portal back-end - done with Hibernate. - Done.</h4>
+<h4 id="spring-mvc-failed-would-go-for-servlet-and-jsp-on-the-portal---done.">3.Spring MVC failed, would go for Servlet and JSP on the portal - Done.</h4>
+<h4 id="split-database-layer-with-front-end-layer-and-try-to-integrate-services-to-ejb-and-call-them-by-rest.---failed.">4.Split Database layer with front-end layer and try to integrate services to ejb and call them by REST. - Failed.</h4>
+<h4 id="shift-order-repositoty-back-to-portal-side-and-get-project-wrapped.">5.Shift order repositoty back to portal side and get project wrapped.</h4>
+<h2 id="deploy-service-components-onto-enterprise-application-servers.">Deploy service components onto enterprise application servers.</h2>
+<p>Portal deployed. Db setup with phpmyadmin on XAMPP. Db creation script is ready in git repo. Failed to inject EJB and call with SOAP service from portal side. Deploy with JSP and Hibernate porta. The tricky point here is to deploy the regular jsp portal with external database lib in a pack to Enterprise server. This has been an issue for a while case we do have lots of different versions and frameworks. Maven provides enrich feature to let us convert the proejct to MAVEN and customized of build.</p>
+<h3 id="task-breakdown-1">Task breakdown:</h3>
+<h4 id="split-database-layer-with-portal-layer.">Split database layer with portal layer.</h4>
+<h4 id="move-order-repository-back-from-ejb-cause-ejb-keep-getting-issues-with-external-libs.">Move order repository back from ejb, cause ejb keep getting issues with external libs.</h4>
+<h4 id="integrate-the-planning-service-back-to-portal-home-page.">Integrate the planning service back to portal home page.</h4>
+<figure>
+<img src="screenshots/planning.png" alt="Budget Planning Service" /><figcaption>Budget Planning Service</figcaption>
+</figure>
+<h4 id="deploy-and-test-the-application-overall.-give-a-short-video.">Deploy and test the application overall. Give a short video.</h4>
+<p>Write a short description (including the new features).</p>
+<h2 id="create-web-user-interfacemobile-applications-to-use-the-applicationweb-services.">Create web user interface/mobile applications to use the application/web services.</h2>
+<p>Done with the previous tasks. Please see the video demo afterwards.</p>
+<figure>
+<img src="screenshots/home.png" alt="Home page" /><figcaption>Home page</figcaption>
+</figure>
+<h2 id="test-your-services-log-your-services-and-document-your-term-project.">Test your services, log your services, and document your term project.</h2>
+<p>Validation and logging would be saved to future work, but we have tested the service with enough local testing. We use kind of TDD concept. Each function is tested in the App.java file which has the main function to test locally.</p>
+<h2 id="demonstrate-your-term-project-in-final-project-presentation-slides-or-short-video.">Demonstrate your term project in final project presentation, slides, or short video.</h2>
+<p>Please see the short video.</p>
