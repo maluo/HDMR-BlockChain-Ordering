@@ -5,7 +5,7 @@
 
 ## Write a project proposal (2-3 pages) - Done. [30/30/*]
 
-![image](screenshots/proposal.png)
+![Sequence Diagram From Proposal](screenshots/proposal.png)
 
 Done with the first version of proposal, will keep adding more functionalities here.
 
@@ -13,11 +13,11 @@ Done with the first version of proposal, will keep adding more functionalities h
 
 Data is from a real world example on facebook market store.  The importing and sales orders are sitting on the same dashboard which is a perfect example of semi-structured data.  We have them exported from google sheet and would like to perform analysis on the dashboard.  The service calculation would be totally rely on Map-Reduce algorithms. We have pulled two csv files as resources.  ``item.csv`` is like an iventory, and ``orders-split.csv`` will be a dashboard for all the importing and exporting goods.  The main purpose of this dashboard is to try a Block-chain styling of book keeping.
 
-Please see this attached screenshot.
+![Sample Data](screenshots/sample data.png)
 
 ## Develop and implement data application algorithms for the proposed application problem. - Done. [30/30/*]
 
-I don't want to mention too much for the JSP and Hibernate part which relies on the Eclipse Tools and Java Framework.  The interesting point here is the Map-Reduce algorithms.  Basically, a portal is implemented and we can perform operations on the order list.
+I don't want to mention too much for the JSP and Hibernate part which relies on the Eclipse Tools and Java Framework.  The interesting point here is the Map-Reduce algorithms.  Basically, a portal is implemented and we can perform operations on the order list.  Map-reduce on keyword mappings would be the key logic in our computations.
 
 ### Map-Reduce Service points:
 
