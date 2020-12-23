@@ -55,16 +55,21 @@ We would like to use Hadoop API and Spark API cause we need to integrate this se
 
 Tried to implement this concept in Hadoop, but turns out Java Stream is also a good approach.
 
-#### 1.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price, and keep values positive.
+#### 1.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price.
 
 ```
+        public Map<Integer,Double> getSalesAvgPerItem(){
+
+        List<Tuple> tuples = new ArrayList<Tuple>();
+        List<Orders> out = orderDaoImpl.findAllOrders().stream().filter(x -> (x.getOrderNum().contains("-")))
+                .collect(Collectors.toList());
+
         Function<Orders, List<Object>> compositeKey = orderRecord -> Arrays.<Object>asList(orderRecord.getOrderNum2(),
                 orderRecord.getItems().getProductId());
 
         Map<List<Object>, Double> mapOut = out.stream().collect(
                 Collectors.groupingBy(compositeKey, Collectors.averagingDouble(orderR -> orderR.getUnitPrice())));
 
-        List<Tuple> tuples = new ArrayList<Tuple>();
         for (Entry<List<Object>, Double> entry : mapOut.entrySet()) {
             tuples.add(new Tuple(entry.getKey().toArray()[0].toString(), (int) entry.getKey().toArray()[1],
                     (Double) entry.getValue()));
@@ -72,35 +77,97 @@ Tried to implement this concept in Hadoop, but turns out Java Stream is also a g
 
         Map<Integer, Double> sales = tuples.stream().collect(
                 Collectors.groupingBy(record -> record.item_num, Collectors.averagingDouble(orderR -> orderR.profit)));
+
+        return sales;
+    }
 ```
 
-#### 2.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price, and keep values negative.
+#### 2.<Order_Num_Post,item_num,unit_price> reduction - store avg unit price for importing
 
 ```
+    public Map<Integer,Double> getImportAvgPerItem(){
+
+        List<Tuple> tuples = new ArrayList<Tuple>();
+        List<Orders> in = orderDaoImpl.findAllOrders().stream().filter(x -> x.getOrderNum().contains("I")).collect(Collectors.toList());
+
+        Function<Orders, List<Object>> compositeKey = orderRecord -> Arrays.<Object>asList(orderRecord.getOrderNum2(),
+                orderRecord.getItems().getProductId());
+
         Map<List<Object>, Double> mapIn = in.stream().collect(
                 Collectors.groupingBy(compositeKey, Collectors.averagingDouble(orderR -> orderR.getUnitPrice())));
 
         tuples = new ArrayList<Tuple>();
         for (Entry<List<Object>, Double> entry : mapIn.entrySet()) {
             tuples.add(new Tuple(entry.getKey().toArray()[0].toString(), (int) entry.getKey().toArray()[1],
-                    -(Double) entry.getValue()));
+                    (Double) entry.getValue()));
         }
         Map<Integer, Double> buget_In = tuples.stream().collect(
                 Collectors.groupingBy(record -> record.item_num, Collectors.averagingDouble(orderR -> orderR.profit)));
+
+        return buget_In;
+    }
 ```
 
-#### 3.<item_num,unit_price> reduction - store avg profit for each item.  If negative which means it is never sold.
+#### 3. List<item_name , importing price, sales price> reduction and pass this one to Knapsack calculation
 
 ```
-        Map<Integer, Double> combined = new HashMap<Integer, Double>();
-        double profit = 0;
-        for (Entry<Integer, Double> entry : sales.entrySet()) {
-            profit = entry.getValue() + buget_In.get(entry.getKey());
-            combined.put(entry.getKey(), profit);
+    public List<ItemUnit> getKnapsackInput(){
+        Map<Integer,Double> budget_In, sales;
+        budget_In = getImportAvgPerItem();
+        sales = getSalesAvgPerItem();
+
+        Object[] keys = budget_In.keySet().toArray();
+        for (Object obj : keys) {
+            if (!sales.containsKey(obj)) {
+                budget_In.remove(obj);
+            }
         }
+
+        List<Items> items= itemDaoImpl.findAllItems();
+        HashMap<Integer,String> itemMaps= new HashMap<Integer,String>();
+        for(Items i : items) {
+            itemMaps.put(i.getId(), i.getProductName());
+        }
+
+        List<ItemUnit> units= new ArrayList<ItemUnit>();
+        ItemUnit unit = null;
+        for (Entry<Integer, String> entry : itemMaps.entrySet()) {
+            try {
+            unit = new ItemUnit(entry.getValue(),budget_In.get(entry.getKey()),sales.get(entry.getKey()));
+            units.add(unit);
+            }catch(Exception e) {}
+        }
+
+        return units;
+    }
 ```
 
 #### Based on step 3. result from Profit Service, we would could do a continuous knapsack with a given budget.
+
+```
+    @WebServlet("/order/dash")
+    public class DashboardController extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+        private OrderDao orderDao = OrderDaoIMPL.getInstance();
+        OrderRepo repo = new OrderRepo();;
+
+        public DashboardController() {
+            // Do Nothing
+        }
+
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+
+                Integer budget = Integer.parseInt(request.getParameter("budget"));
+
+                ContinousKnapsackWrapper o = new ContinousKnapsackWrapper(budget,repo.getKnapsackInput());
+
+                request.setAttribute("budgetPlan", o.getBuf());
+
+                request.getRequestDispatcher("/").forward(request, response);
+        }
+    }
+```
 
 ## Create deployable service components using application models using Java based enterprise computing technologies, to create client program to do remote call of the data mining services.
 
