@@ -12,8 +12,6 @@ public class SBStateful implements SBStatefulRemote, SBStatefulLocal {
 		
 	@EJB
 	private SBStatelessLocal sbsl;
-	@EJB 
-	private SecurityLocal guard;
 		
     /**
      * Default constructor. 
@@ -37,12 +35,8 @@ public class SBStateful implements SBStatefulRemote, SBStatefulLocal {
 	}
 
 	@Override
-	public String Predict(int a, String user) {     
-	    if (guard.validate(user) == true) {         
-	      return sbsl.getPrediction(a);
-	    } 
-	    else 
-	      return "invalid user";
+	public String Predict(int a, String user) {
+		return sbsl.getPrediction(a);
 	}
 
 }

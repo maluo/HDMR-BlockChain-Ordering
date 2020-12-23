@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 
 import HDMRORDERS.DB.DAO.ItemDao;
 import HDMRORDERS.DB.DOMAIN.Items;
+import HDMRORDERS.DB.DOMAIN.Orders;
 import HDMRORDERS.DB.UTIL.HibernateUtil;
 
 public class ItemDaoIMPL implements ItemDao{
@@ -58,7 +59,10 @@ public class ItemDaoIMPL implements ItemDao{
 	
 	public List<Items> findAllItems() {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = this.sessionFactory.openSession();
+		List<Items> itemList = session.createCriteria(Items.class).list();
+		session.close();
+		return itemList;
 	}
 
 }

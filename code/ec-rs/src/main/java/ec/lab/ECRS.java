@@ -15,6 +15,8 @@ public class ECRS {
     @EJB SBStatelessLocal sbsl;
     //@Inject SBStatelessLocal sbsl;
     
+    
+    //Was going to give a best value planning based on this service but failed.  Just going to put the order repo in Portal side now.
     @GET
     @Path("/predict")
     @Produces("text/plain")

@@ -2,8 +2,9 @@ package ec.lab;
 
 import javax.ejb.LocalBean;
 
-import HDMRORDERS.DB.DAO.OrderDao;
-import HDMRORDERS.DB.DAO.IMPL.*;
+import ec.CALCULATION.ContinousKnapsackWrapper;
+import ec.REPOSITORY.OrderRepo;
+
 import javax.ejb.Singleton;
 
 /**
@@ -13,12 +14,13 @@ import javax.ejb.Singleton;
 @LocalBean
 public class SBSingleton implements SBSingletonRemote, SBSingletonLocal {
 	private int counter = 0;
-	private OrderDao orderImpl = new OrderDaoIMPL();
+	OrderRepo repo = null;
 
     /**
      * Default constructor. 
      */
     public SBSingleton() {
+    	repo = new OrderRepo();
     }
 
 	@Override
@@ -28,7 +30,7 @@ public class SBSingleton implements SBSingletonRemote, SBSingletonLocal {
 	}
 
 	@Override
-	public int incCounter() {
+	public int incCounter() {		
 		counter++;
 		return counter;
 	}
@@ -36,5 +38,12 @@ public class SBSingleton implements SBSingletonRemote, SBSingletonLocal {
 	@Override
 	public String getSBType() {
 		return "singleton";
+	}
+	
+	@Override
+	public String getPredictionPlanWithBudget(int budget) {
+		// TODO Auto-generated method stub
+    	ContinousKnapsackWrapper o = new ContinousKnapsackWrapper(budget,repo.getKnapsackInput());
+		return o.getBuf();
 	}
 }

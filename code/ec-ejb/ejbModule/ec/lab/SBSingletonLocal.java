@@ -6,4 +6,5 @@ import javax.ejb.Local;
 public interface SBSingletonLocal {
 	public int incCounter();
 	public int getCounter();
+	public String getPredictionPlanWithBudget(int budget);
 }

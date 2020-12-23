@@ -31,12 +31,14 @@ public class SBStateless implements SBStatelessRemote, SBStatelessLocal {
 
 	@Override
 	public String getPrediction(int a) {
-		LOGGER.info("getPrediciton method is called "+ a);
-		sbsgt.incCounter();
+		LOGGER.info("getPrediciton method is called with budget: "+ a);
+		
+		return sbsgt.getPredictionPlanWithBudget(a);
+		/*sbsgt.incCounter();
 		if (a >= 70)
 		    return "Pass";
 		else
-		    return "Fail";
+		    return "Fail";*/
 	}
 
 	@Override
