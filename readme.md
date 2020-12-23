@@ -179,25 +179,25 @@ Tried to implement this concept in Hadoop, but turns out Java Stream is also a g
 
 #### 3.Spring MVC failed, would go for Servlet and JSP on the portal - Done.
 
-#### 4.Start Hadoop on client side - focus on this part, need to get this major part as of tonight.
+#### 4.Split Database layer with front-end layer and try to integrate services to ejb and call them by REST. - Failed.
+
+#### 5.Shift order repositoty back to portal side and get project wrapped.
 
 ## Deploy service components onto enterprise application servers.
 
-Portal deployed.  Working on the Hadoop and Spark client API.  Need to inject EJB and call with SOAP service from portal side.
+Portal deployed.  Db setup with phpmyadmin on XAMPP.  Db creation script is ready in git repo.  Failed to inject EJB and call with SOAP service from portal side.  Deploy with JSP and Hibernate porta.  The tricky point here is to deploy the regular jsp portal with external database lib in a pack to Enterprise server.  This has been an issue for a while case we do have lots of different versions and frameworks.  Maven provides enrich feature to let us convert the proejct to MAVEN and customized of build.
 
 ### Task breakdown:
 
-#### 1.Inject the Hadoop client code into EJB.
+#### Split database layer with portal layer.
 
-#### 2.Deploy EJB component and test out with local client.
+#### Move order repository back from ejb, cause ejb keep getting issues with external libs.
 
-## Create web services (SOAP, RESTful) to use the data service components.
+#### Integrate the planning service back to portal home page.
 
-### Task breakdown:
+![Budget Planning Service](screenshots/planning.png)
 
-#### 1.Develop rest service with EJB.
-
-#### 2.Direct the dashboard service back to the main Spring MVC Web Portal.
+#### Deploy and test the application overall.  Give a short video.
 
 Write a short description (including the new features).
 
