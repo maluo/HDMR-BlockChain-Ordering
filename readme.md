@@ -39,13 +39,17 @@ I don't want to mention too much for the JSP and Hibernate part which relies on 
 
 ``{1=7.590909090909092, 2=14.314285714285717, 3=19.515740712483723, 4=14.167083581288658, 5=18.5, 8=18.0}``
 
-### 2. Scala Planing service (0/1 Knapsack)
+### 2. Scala Planing service (Continous Knapsack)
 
-Generate a Map-Reduce model giving price and profit value for each item, give a best strategy based on the budget.  We could include size of the product and give stock size as another feature for multi-dimentional Knapsack, which is super popular these days, but they will cost way more time as we are doing the research.  An example for this would be given in the [Elephant56](https://github.com/pasqualesalza/elephant56) We could do data clean up and map them back to a 3 3NF tables in mysql, but I strongly feel like No-sql reseach will push data solution forward.  Tese cases would be build to make sure we have the proper result before pushing the service to WAR file.
+This part has been impelemented with java stream which also provides Map-Reduce based operations.  Local machine is so struggling with Hadoop and Scala implementation.
+
+Basic idea is to generate a Map-Reduce model giving price and profit value for each item, give a best strategy based on the budget.  We could include size of the product and give stock size as another feature for multi-dimentional Knapsack, which is super popular these days, but they will cost way more time as we are doing the research.  An example for this would be given in the [Elephant56](https://github.com/pasqualesalza/elephant56) We could do data clean up and map them back to a 3 3NF tables in mysql, but I strongly feel like No-sql reseach will push data solution forward.  Tese cases would be build to make sure we have the proper result before pushing the service to WAR file.
 
 ## Do data computing to generate models, representing models in portable format and stored in file or database. More credit is given if distributed approach is used data mining of big dataset
 
-We would use Hadoop API and Spark API cause we need to integrate this section to beans and call it with soap service from portal side.
+We would like to use Hadoop API and Spark API cause we need to integrate this section to beans and call it with soap service from portal side.  But as we struggled at local machine with Hadoop, we shift the core logic to portal side with Java Stream and Hibernate.
+
+![Portal Repo](screenshots/orderrepo.png)
 
 ### Profit Service:
 
@@ -96,9 +100,7 @@ Tried to implement this concept in Hadoop, but turns out Java Stream is also a g
         }
 ```
 
-### Scala Planing Service:
-
-#### 1.Based on step 3. result from Profit Service, we would could do a 0/1 knapsack with a given budget.
+#### Based on step 3. result from Profit Service, we would could do a continuous knapsack with a given budget.
 
 ## Create deployable service components using application models using Java based enterprise computing technologies, to create client program to do remote call of the data mining services.
 
