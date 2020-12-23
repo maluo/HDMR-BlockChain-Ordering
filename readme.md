@@ -13,7 +13,7 @@ Done with the first version of proposal, will keep adding more functionalities h
 
 Data is from a real world example on facebook market store.  The importing and sales orders are sitting on the same dashboard which is a perfect example of semi-structured data.  We have them exported from google sheet and would like to perform analysis on the dashboard.  The service calculation would be totally rely on Map-Reduce algorithms. We have pulled two csv files as resources.  ``item.csv`` is like an iventory, and ``orders-split.csv`` will be a dashboard for all the importing and exporting goods.  The main purpose of this dashboard is to try a Block-chain styling of book keeping.
 
-![Sample Data](screenshots/sample data.png)
+![Sample Data](screenshots/sampledata.png)
 
 ## Develop and implement data application algorithms for the proposed application problem. - Done. [30/30/*]
 
