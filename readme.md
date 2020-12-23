@@ -5,7 +5,7 @@
 
 ## Write a project proposal (2-3 pages) - Done. [30/30/*]
 
-![image](screenshots/home.png)
+![image](screenshots/proposal.png)
 
 Done with the first version of proposal, will keep adding more functionalities here.
 
