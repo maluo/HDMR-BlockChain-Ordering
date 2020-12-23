@@ -5,6 +5,8 @@
 
 ## Write a project proposal (2-3 pages) - Done. [30/30/*]
 
+![image](screenshots/home.png)
+
 Done with the first version of proposal, will keep adding more functionalities here.
 
 ## Design data format, collect data, create dataset for the application - Done. [30/30/*]
