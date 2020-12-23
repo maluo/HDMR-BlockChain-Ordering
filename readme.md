@@ -203,12 +203,14 @@ Write a short description (including the new features).
 
 ## Create web user interface/mobile applications to use the application/web services.
 
-Done with the previous tasks.
+Done with the previous tasks.  Please see the video demo afterwards.
+
+![Home page](screenshots/home.png)
 
 ## Test your services, log your services, and document your term project.
 
-Testing and logging would be saved for future development
+Validation and logging would be saved to future work, but we have tested the service with enough local testing.  We use kind of TDD concept.  Each function is tested in the App.java file which has the main function to test locally.
 
 ## Demonstrate your term project in final project presentation, slides, or short video.
 
-Write a short description (including the new features).
+Please see the short video.
